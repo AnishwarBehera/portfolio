@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Your Name</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #2575fc;
+            --secondary: #6a11cb;
+            --text: #2c3e50;
+            --background: #f8f9fa;
+            --card-bg: #ffffff;
+            --gradient: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: var(--background);
+            line-height: 1.6;
+        }
+
+        header {
+            min-height: 100vh;
+            background: var(--gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before,
+        header::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            opacity: 0.5;
+        }
+
+        header::before {
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: rotate 25s infinite linear;
+        }
+
+        header::after {
+            background: radial-gradient(circle at 70% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: rotate 30s infinite linear reverse;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg) translateY(-50%) scale(1); }
+            50% { transform: rotate(180deg) translateY(0%) scale(1.2); }
+            100% { transform: rotate(360deg) translateY(-50%) scale(1); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: translateY(0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            color: var(--secondary);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%) scale(0);
+            border-radius: 50%;
+            transition: transform 0.6s;
+        }
+
+        .btn:hover::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        section {
+            padding: 3rem 1rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 0;
+        }
+
+        .project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .project:hover::before {
+            opacity: 0.95;
+        }
+
+        .project > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project:hover h3 {
+            color: white;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .skills li {
+            list-style: none;
+            padding: 1rem 2rem;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            color: var(--primary);
+            font-weight: 600;
+            transform: translateY(0);
+        }
+
+        .skills li:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            background: var(--gradient);
+            color: white;
+        }
+
+        .experience-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transform: translateX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .experience-item ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .experience-item li {
+            margin: 0.5rem 0;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .experience-item:hover li {
+            opacity: 1;
+        }
+
+        .experience-item p {
+            color: var(--primary);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .socials {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .socials a {
+            color: var(--primary);
+            font-size: 2rem;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .socials a:hover {
+            color: var(--secondary);
+            transform: translateY(-3px) rotate(8deg);
+        }
+
+        footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+
+            .skills li {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .project {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+</style>
+</head>
+<body>
+    <header id="home">
+        <div class="header-content">
+            <h1>Hi, I'm <span>Anishwar Behera</span></h1>
+            <p>Aspiring Data Scientist</p>
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto;">Data-driven professional with a passion for  predictive modeling, visualization. Seeking a role where I can learn and grow within dynamic and innovative data science field.</p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="Anishwar_Cv.pdf" download class="btn">Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project">
+                    <h3>Stock Analyzer</h3>
+                    <p>A GenAI tool to summarizes and analyzes financial data from company reports.</p>
+                    <div class="project-links" style="margin-top: 1rem;">
+                        <a href="http://149.102.156.167:8501/" target="_blank" class="btn">View Project</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <h3>Tsunami Forecasting</h3>
+                    <p>A machine learning model predicting the likelihood of tsunamis post-earthquake.</p>
+                    <div class="project-links" style="margin-top: 1rem;">
+                        <a href="http://149.102.156.167:7000/" target="_blank" class="btn">View Project</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <h3>Tumor Detection</h3>
+                    <p>A CNN model aimed at detecting kidney tumors from CT scan images</p>
+                    <div class="project-links" style="margin-top: 1rem;">
+                        <a href="http://149.102.156.167:8080/" target="_blank" class="btn">View Project</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <h3>Delivery Time Prediction</h3>
+                    <p>A regression model designed to estimate food delivery times</p>
+                    <div class="project-links" style="margin-top: 1rem;">
+                        <a href="http://149.102.156.167:5555/" target="_blank" class="btn">View Project</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <h3>Warehouse Inventory Dashboard</h3>
+                    <p> A dashboard showcasing the inventory and sales of a company's warehouses</p>
+                    <div class="project-links" style="margin-top: 1rem;">
+                        <a href="https://app.powerbi.com/reportEmbed?reportId=d9b8d337-cdae-4118-9473-98a5ad86318c&autoAuth=true&ctid=6c4fa77f-e2e3-4944-80a8-45cd19556ce9" target="_blank" class="btn">View Project</a>
+                        <a href="Inventory.pdf" target="_blank" class="btn">View PDF</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <h3>Scheduling Techniques in Cloud Computing Environment</h3>
+                    <p>A Study on Different Types of Techniques and Benefits of Scheduling Tasks in the Cloud for Optimal Performance</p>
+                    <div class="project-links" style="margin-top: 1rem;">
+                        <a href="Paper.pdf" target="_blank" class="btn">View Paper</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section id="skills" style="background: white;">
+        <div class="container">
+            <h2>Skills</h2>
+            <ul class="skills">
+                <li>Python</li>
+                <li>Machine Learning</li>
+                <li>Deep Learning</li>
+                <li>GenAI</li>
+                <li>Web Scraping</li>
+                <li>Streamlit</li>
+                <li>Flask</li>
+                <li>PowerBI</li>
+                <li>MYSQL</li>
+                <li>C++</li>
+                <li>HTML/CSS/JavaScript</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <h3>Front-End Engineer - DecodeG</h3>
+                <p>Designed and implemented responsive and user-friendly web interfaces, ensuring optimal user experience across various devices</p>
+            </div>
+        </div>
+    </section>
+    <section id="contact" style="background: white;">
+        <div class="container">
+            <h2>Contact</h2>
+            <p style="text-align: center;">If you'd like to get in touch, feel free to reach out via email:</p>
+            <p style="text-align: center; margin-top: 1rem;">
+                <a href="mailto:yourname@gmail.com" class="btn">anishwarbehera@gmail.com</a>
+            </p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Anishwar. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
