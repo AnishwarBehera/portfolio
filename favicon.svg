@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#2563eb"/>
+  
+  <!-- Letter P -->
+  <path d="M8 8 h12 q4 0 4 4 v4 q0 4 -4 4 h-8 v4 h-4 z" fill="white"/>
+  <path d="M12 12 v4 h4 q1 0 1 -2 v0 q0 -2 -1 -2 z" fill="#2563eb"/>
+</svg>
